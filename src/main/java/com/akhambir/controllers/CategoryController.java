@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -41,10 +42,18 @@ public class CategoryController {
                 .orElseGet(ResponseEntity.notFound()::build);
     }
 
-    @RequestMapping(value = "category", method = RequestMethod.POST)
-    public ResponseEntity<Category> create(@RequestBody Category category) {
+    @RequestMapping(value = "/category", method = RequestMethod.POST)
+    public ResponseEntity<Category> create(@Valid @RequestBody Category category) {
         return categoryService.create(category)
                 .map(c -> ResponseEntity.created(getUri(c.getId())).body(c))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.CONFLICT));
+    }
+
+    @RequestMapping(value = "/category/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<Category> update(@RequestBody Category category, @PathVariable Long id) {
+        category.setId(id);
+        return categoryService.update(category)
+                .map(ResponseEntity::ok)
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.CONFLICT));
     }
 

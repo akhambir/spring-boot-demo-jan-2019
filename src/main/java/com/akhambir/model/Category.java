@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotNull
     @Column(name = "CATEGORY_NAME")
     private String categoryName;
     @Column(name = "CATEGORY_DESCRIPTION")
@@ -27,6 +29,15 @@ public class Category {
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
     private List<Product> products = new ArrayList<>();
 
+    public Category() {
+    }
+
+    public Category(Long id, String categoryName, String description, List<Product> products) {
+        this.id = id;
+        this.categoryName = categoryName;
+        this.description = description;
+        this.products = products;
+    }
 
     public Long getId() {
         return id;

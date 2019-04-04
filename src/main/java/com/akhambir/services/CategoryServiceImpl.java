@@ -29,4 +29,9 @@ public class CategoryServiceImpl implements CategoryService {
     public Optional<Category> create(Category category) {
         return Optional.of(categoryDao.save(category));
     }
+
+    @Override
+    public Optional<Category> update(Category category) {
+        return Optional.of(categoryDao.save(category));
+    }
 }

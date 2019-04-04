@@ -12,4 +12,6 @@ public interface CategoryService {
     Optional<Category> getById(Long id);
 
     Optional<Category> create(Category category);
+
+    Optional<Category> update(Category category);
 }
