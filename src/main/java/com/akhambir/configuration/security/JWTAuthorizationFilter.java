@@ -48,6 +48,7 @@ public class JWTAuthorizationFilter extends UsernamePasswordAuthenticationFilter
                 .compact();
 
         response.addHeader("Authorization", token);
+        response.addHeader("Access-Control-Expose-Headers", "Authorization");
     }
 
     private User getUserFromIS(HttpServletRequest request) {
