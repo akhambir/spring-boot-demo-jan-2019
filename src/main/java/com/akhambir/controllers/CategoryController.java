@@ -15,6 +15,8 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
+import static com.akhambir.controllers.ControllersUtil.getUri;
+
 @RestController
 public class CategoryController {
 
@@ -45,7 +47,7 @@ public class CategoryController {
     @RequestMapping(value = "/category", method = RequestMethod.POST)
     public ResponseEntity<Category> create(@Valid @RequestBody Category category) {
         return categoryService.create(category)
-                .map(c -> ResponseEntity.created(getUri(c.getId())).body(c))
+                .map(c -> ResponseEntity.created(getUri("category", c.getId())).body(c))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.CONFLICT));
     }
 
@@ -57,7 +59,5 @@ public class CategoryController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.CONFLICT));
     }
 
-    private URI getUri(Long id) {
-        return URI.create(String.format("/category/%s", id));
-    }
+
 }

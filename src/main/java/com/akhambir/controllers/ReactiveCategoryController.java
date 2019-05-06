@@ -12,7 +12,6 @@ import reactor.core.publisher.Mono;
 
 import javax.persistence.EntityNotFoundException;
 import java.time.Duration;
-import java.time.LocalDateTime;
 
 import static org.springframework.http.MediaType.TEXT_EVENT_STREAM_VALUE;
 
