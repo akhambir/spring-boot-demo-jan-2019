@@ -26,7 +26,7 @@ public class Product {
     @Column(name = "PRICE")
     private double price;
     @JsonBackReference
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "FK_CATEGORY_ID")
     private Category category;
 

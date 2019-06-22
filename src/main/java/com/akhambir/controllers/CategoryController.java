@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.net.URI;
 import java.util.List;
 
 import static com.akhambir.controllers.ControllersUtil.getUri;
@@ -25,16 +24,14 @@ public class CategoryController {
 
     @RequestMapping(value = "/category", method = RequestMethod.GET)
     public ResponseEntity<List<Category>> getAll() {
-        List<Category> categories = categoryService.getAll();
-        ResponseEntity<List<Category>> result;
-
-        if (categories.isEmpty()) {
-            result = ResponseEntity.notFound().build();
-        } else {
-            result = new ResponseEntity<>(categories, HttpStatus.OK);
-        }
-
-        return result;
+        return categoryService.getAll()
+                .map(ResponseEntity::ok)
+                .orElseGet(ResponseEntity.notFound()::build);
+    }
+    @RequestMapping(value = "/category-test", method = RequestMethod.GET)
+    public ResponseEntity<String> test() {
+        categoryService.test();
+        return ResponseEntity.ok("TEST");
     }
 
     @RequestMapping(value = "/category/{id}", method = RequestMethod.GET)
@@ -58,6 +55,4 @@ public class CategoryController {
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.CONFLICT));
     }
-
-
 }

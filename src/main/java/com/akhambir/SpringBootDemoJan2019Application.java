@@ -10,7 +10,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 
-@EnableScheduling
+//@EnableScheduling
 @SpringBootApplication
 public class SpringBootDemoJan2019Application {
 

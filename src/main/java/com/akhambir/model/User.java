@@ -33,6 +33,10 @@ public class User {
     @Column(name = "STATUS")
     @Enumerated(EnumType.STRING)
     private UserStatus status;
+    @Column(name = "AMOUNT")
+    private Double amount;
+    @Column(name = "ACCOUNT")
+    private Integer account;
     /*@ManyToMany()
     @JoinTable(name = "USERS_TO_ROLES",
             joinColumns = @JoinColumn(name = "FK_USER_ID"),
@@ -103,6 +107,22 @@ public class User {
 
     public void setStatus(UserStatus status) {
         this.status = status;
+    }
+
+    public Double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Double amount) {
+        this.amount = amount;
+    }
+
+    public Integer getAccount() {
+        return account;
+    }
+
+    public void setAccount(Integer account) {
+        this.account = account;
     }
 
     public enum UserStatus {

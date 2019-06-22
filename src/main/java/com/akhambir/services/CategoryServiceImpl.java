@@ -2,6 +2,7 @@ package com.akhambir.services;
 
 import com.akhambir.dao.CategoryDao;
 import com.akhambir.model.Category;
+import com.akhambir.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +17,20 @@ public class CategoryServiceImpl implements CategoryService {
     private CategoryDao categoryDao;
 
     @Override
-    public List<Category> getAll() {
-        return categoryDao.findAll();
+    public Optional<List<Category>> getAll() {
+        return Optional.of(categoryDao.findAll());
+    }
+
+    @Override
+    public Optional<List<Category>> test() {
+        List<Category> result = categoryDao.findAll();
+        for (Category c: result) {
+            List<Product> products = c.getProducts();
+            for (Product p : products) {
+                System.out.println(p.getProductName());
+            }
+        }
+        return Optional.empty();
     }
 
     @Override
